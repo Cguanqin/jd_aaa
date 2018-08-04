@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>提醒跳转</title>
+</head>
+<body>
+	{$msg}
+<script type="text/javascript">
+	setInterval(tiaoz,1000)
+	var n =3
+	function tiaoz(){
+		if(n>=0){
+			document.querySelector("#s").innerHTML = n
+		}
+		else{
+			location.href="{$url}";
+			// location.href = "http://localhost/web/eleven_day/?control=user&action=register";
+		}
+		--n
+		
+	}
+	
+</script>
+
+<br>
+<b id="s"></b>秒自动跳转
+<a href="{$url}">手工跳转</a>
+</body>
+</html>

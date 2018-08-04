@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>06-css</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 50px;
+            background: red;
+        }
+        .rotate{
+            animation: rotate111 3s linear both;
+        }
+        @keyframes rotate111{
+            0%{
+                transform: translateY(0) rotate(0deg);
+            }
+            100%{
+                transform: translateY(500px) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+        transform   变形变换 移动
+        transition  过渡
+        animation   调用动画
+        @keyframes  定义动画
+         -->
+
+    <div class="box rotate">
+
+    </div>
+</body>
+</html>

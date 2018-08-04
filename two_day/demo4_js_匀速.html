@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		*{margin: 0;padding: 0;}
+		.box{width: 50px;height: 50px;background: red;}
+	</style>
+</head>
+<body>
+<input type="submit" onclick="move(5,500)" class="btn">
+<input type="submit" onclick="move(-5,0)" class="btn">
+<div class="box"></div>
+<script>
+	var box = document.querySelector(".box");
+	var btn = document.querySelector("input.btn");
+	var timer = null;
+	// var speed = 10;
+	function move(speed,iTarger){
+		// clearInterval(timer)
+		timer = setInterval(function(){
+			if (box.offsetLeft == iTarger) {
+				clearInterval(timer);
+			}
+			else{
+				box.style.marginLeft = box.offsetLeft+speed+"px";
+				console.log(box.style.marginLeft)
+		}
+			},30 )
+
+	}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script type="" src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"> </script>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="jdsx.css">
+
+</head>
+<body>
+	<div class="view">
+		<div class="container">
+			
+			<div class="row">
+
+				<!-- nav -->
+				<div class="row">
+					<div class="col-md-2" :class="{'cur':cur_goods_code==0}" @click="change_box(0)">早</div>
+					<div class="col-md-2" :class="{'cur':cur_goods_code==1}" @click="change_box(1)">午</div>
+					<div class="col-md-2" :class="{'cur':cur_goods_code==2}" @click="change_box(2)">晚</div>
+					<div class="pull-right col-md-3">时间</div>
+				</div>
+
+				<div class="row goods_list_box">
+
+					<div class="left_arrow icon" @click="go_left()">左<</div>
+
+					<div class="right_arrow icon" @click="go_right()">右></div>
+
+					<div class="paopao_box">
+						<div v-for="n in 3" @click="go_num(n)"></div>
+					</div>
+
+					<ul v-if="cur_goods_code == 0" class="morning_box goods_list" :style="'margin-left:'+move_px">
+						<li v-for="n in 15">
+							<img src="https://img10.360buyimg.com/babel/s180x180_jfs/t19981/271/1100568299/84332/f0cccdb3/5b163457Nc6d4cff5.jpg!q80.webp" alt="">
+							<p>{{n}}</p>
+						</li>
+					</ul> 
+
+					<ul v-if ="cur_goods_code == 1" class="zhong_box goods_list">
+						<li v-for="n in 15">
+							<img src="https://img12.360buyimg.com/babel/s180x180_jfs/t18295/193/1952147853/299170/75b76535/5add6b7eN7f525cf4.jpg!q80.webp" alt=""></li>	
+					</ul>
+
+					<ul v-if="cur_goods_code == 2" class="evening_box goods_list">
+						<li v-for="n in 15">
+							<img src="https://img10.360buyimg.com/babel/s180x180_jfs/t19981/271/1100568299/84332/f0cccdb3/5b163457Nc6d4cff5.jpg!q80.webp" alt=""></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script type="text/javascript">
+		new Vue({
+			el:'.view',
+			data:{
+				//显示当前盒子的数字
+				cur_goods_code:0,
+				move_px:0,         //移动的像素
+				change_num:0,      //切换的次数
+				box_width:-1140,
+			},
+			methods:{
+				change_box(code){
+					this.cur_goods_code = code
+				},
+				go_left(){
+					--this.change_num,
+					//移动的距离 = 切换的次数 * 整个盒子的距离
+					this.move_px = this.change_num * this.box_width+"px"
+				},
+				go_right(){
+					++this.change_num,
+					//移动的距离 = 切换的次数 * 整个盒子的距离
+					this.move_px = this.change_num * this.box_width+"px"
+				},
+				go_num(num){
+					--num
+					this.move_px = num * this.box_width+"px"
+				}
+			}
+		})
+	</script>
+
+</body>
+</html>

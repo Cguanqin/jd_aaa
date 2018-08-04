@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+	*{margin: 0;
+		padding: 0;}
+		.box{
+			width: 50px;
+			height: 50px;
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<input type="button" value="匀速向右" class="btn1" onclick="move(5,500)">
+	<input type="button" value="匀速向左" class="btn2" onclick="move(-5,0)">
+	<div class="box" ></div>
+</body>
+</html>
+
+<script type="text/javascript">
+	var box = document.querySelector(".box")
+	var btn1 = document.querySelector("input.btn1")
+	var btn2 = document.querySelector("input.btn2")
+	// speed = 20;
+	var timer = null;
+
+	function move(speed,Itarget){
+			clearInterval(timer)
+		 timer = setInterval(function(){
+		 	
+			if (box.offsetLeft==Itarget) {
+				clearInterval(timer);
+			}
+			else{
+				box.style.marginLeft = box.offsetLeft + speed+"px";
+			}
+			
+		},30)
+	}
+</script>

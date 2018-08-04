@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script type="" src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"> </script>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="public/static/jdsx_info.css">
+
+
+	<body>
+		<div class="view">
+			<!-- 最外层 -->
+			<div class="container">
+				<div class="content">
+					<!-- 左边 -->
+					<div class="left_box">
+
+						<!--图片盒子 -->
+						<div class="pic_box">
+							<!-- 放小照片 -->
+							<div class="pic">
+								<img src="public/static/images/small.jpg" alt="">
+
+								<div class="bar"></div>
+							</div>
+
+							<!-- 放大后的照片 -->
+							<div class="big_pic">
+								<img src="public/static/images/big.jpg" alt="">
+							</div>
+							<div class="fangda">
+								<img src="public/static/images/icon.png" alt="">
+							</div>
+						</div>
+
+						<!-- 轮播图 -->
+						<div class="slider">
+							<div class="zuo item" @click="go_left()"><</div>
+							<div class="you item" @click="go_right">></div>
+							<div class="picture">
+								<ul class="goods_list" :style="'margin-left:'+move_px">
+									<li v-for="n in 15">
+										<img src="public/static/images/5b57e142N1275ff69.jpg" >
+										<p>{{n}}</p>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+						<div class="preview_info">
+							<div class="left_btn">
+								<div class="icon">
+									<img src="public/static/images/1.png" alt="">
+								</div>
+								<div>关注</div>
+								<div class="icon">
+									<img src="public/static/images/2.png" alt="">
+								</div>
+								<div>分享</div>
+							</div>
+							<div class="right_btn">
+								<div>举报</div>
+							</div>
+						</div>
+
+					</div>
+
+
+
+					<!-- 右边 -->
+					<div class="right_box">
+						<div class="right_top">
+							<div class="shang">
+								<div class="shang_left">京东超市</div>
+								<div class="shang_right" >大牧汗 羔羊羊蝎子 800g/袋 火锅食材</div>
+							</div>
+							<div class="xia" style="font-size: 10px"><span style="color: red">贴秋膘，吃肉肉，一起为肉痴狂！</span><span style="color: #005AA0">部分商品满199减100</span></div>
+						</div>
+						<div class="price_box">
+							<div class="tmp_box">
+								<div class="dd">
+									<li style="color: #A1BADC">京东价</li>
+									<li style="color: #e4393c; font-size: 25px;line-height: 20px">￥35.00</li>
+									<li style="color: #005aa0;vertical-align: 2px;">降价通知</li>
+									<div class="leiji">累计评价</div>
+								</div>
+								<div class="dd">
+									<li style="color: #A1BADC">  促    销</li>
+									<li class="item" >限购</li>
+									<li style="color: #666;vertical-align: 2px"> 购买1-5件时享受单件价￥35，超出数量以结算价为准</li>
+								</div>
+								<div class="dd">
+									<li  style="color: #A1BADC">  促    销</li>
+									<li class="item" >满价</li>
+									<li class="item" >加价购</li>
+									<div class="leiji">展开促销</div>
+								</div>
+							</div>
+							<div class="hidden_box"></div>
+						</div>
+						<div class="sp_info">
+							<div class="row item">
+								<div class="col-md-2">配送至</div>
+								<div class="col-md-4 address">
+									<div>北京朝阳区三环至四环之间</div>
+									<div class="hidden_box"></div>
+								</div>
+							</div>
+							<div class="row item">
+								<div class="col-md-2"></div>
+								<div class="col-md-8">支持生鲜99元免基础运费（50kg内） 京准达 自提 闪电退款</div>
+							</div>
+							<div class="row item">
+								<div class="col-md-2"></div>
+								<div class="col-md-8">由 京东 发货, 并提供售后服务. 23:00前下单,预计明天(08月02日)送达</div>
+							</div>
+							<div class="row item">
+								<div class="col-md-2">重    量</div>
+								<div class="col-md-8">0.84kg</div>
+							</div>
+						</div>
+						<div class="baitiao_box">
+							<div class="col-md-2" style="line-height: 30px">京东白条</div>
+							<div class="item">
+								<p>不分期</p>
+								<div class="hidden_box">无手续费</div>
+							</div>
+							<div class="item">
+								<p>￥22.68起×3期</p>
+								<div class="hidden_box">含手续费：费率0.5%起，￥0.34起×3期</div>
+							</div>
+							<div class="item">
+								<p>￥11.49起×6期</p>
+								<div class="hidden_box">含手续费：费率0.5%起，￥0.34起×6期</div>
+							</div>
+							<div class="item">
+								<p>￥5.96起×12期</p>
+								<div class="hidden_box">含手续费：费率0.5%起，￥0.34起×12期</div>
+							</div>
+						</div>
+						<div class="shopcar_box">
+							<div class="row ">
+								<div class="col-md-2"></div>
+								<div class="col-md-3">购物车</div>
+								<div class="col-md-3">打白条</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<script type="">
+			new Vue({
+				el:'.view',
+				data:{
+					cur_goods_code:0,
+					move_px:0,
+					change_num:0,
+					box_width:276,
+
+				},
+				methods:{
+					go_left(){
+						--this.change_num;
+						this.move_px = this.change_num*this.box_width+"px"
+
+					},
+					go_right(){
+						++this.change_num;
+						this.move_px = this.change_num*this.box_width +"px"
+					},
+					go_num(){
+
+					}
+				}
+			})
+
+
+// 图片放大
+
+// 图片区的最外层盒子
+var pic_box =document.querySelector(".pic_box");
+
+var picImg = document.querySelector(".pic img");
+
+var bar = document.querySelector(".bar");
+
+var big_pic = document.querySelector(".big_pic");
+
+var big_picImg = document.querySelector(".big_pic img");
+
+//显示隐藏
+function $(id,all){ return all ? document.querySelectorAll(all) : document.querySelector(id)};
+
+function show(obj){
+	obj.style.display="block"
+}
+function hide(obj){
+	obj.style.display="none"
+}
+
+pic_box.onmouseover=function () {
+	show(bar);
+	show(big_pic);
+}
+pic_box.onmouseout=function () {
+	hide(bar);
+	hide(big_pic);
+}
+pic_box.onmousemove=function(ev){
+	var x=ev.clientX - pic_box.offsetLeft - 40;
+	var y=ev.clientY - pic_box.offsetTop - 40;
+
+	bar.style.left=x+"px";
+	bar.style.top=y+"px";
+
+	if (bar.offsetLeft <= 0 ){
+		bar.style.left=0+"px";
+	}
+	else if(bar.offsetLeft >= pic_box.offsetWidth - bar.offsetWidth){
+		bar.style.left=pic_box.offsetWidth - bar.offsetWidth+"px";
+	}
+	if (bar.offsetTop <= 0 ){
+		bar.style.top=0+"px";
+	}
+	else if(bar.offsetTop >= pic_box.offsetHeight - bar.offsetHeight){
+		bar.style.top=pic_box.offsetHeight - bar.offsetHeight+"px";
+	}
+
+            //bar 移动一像素， 图片移动几像素
+            // 昨天小明吃了 10个包子，小爸爸吃了8个包子， 今天 小明吃了5.6个包子 小明爸爸吃几个包子
+
+            // 小盒子 除以 大盒子  *  bar 移动的距离 = 图片移动的距离
+            big_picImg.style.left = pic_box.offsetWidth / big_pic.offsetWidth *  -x + "px";
+            big_picImg.style.top = pic_box.offsetHeight / big_pic.offsetHeight *  -y + "px";
+        }
+
+
+    </script>
+
+</body>
+</html>

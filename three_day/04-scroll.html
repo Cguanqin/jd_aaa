@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		*{margin: 0;padding: 0;list-style: none;}
+		.box{width: 600px;height: 1500px;border: 1px solid #eee;margin: auto;}
+		.box .item{
+			width: 100%;height: 210px;border: 1px solid #666;text-align: center;position: relative;
+		}
+		.box .item .content{width: 100%;height: 160px; bottom: 0px;background: red;position: absolute;}
+		ol li{height: 50px;width: 50px;background: #eee;right: 0px;top: 50px;line-height: 35px;margin-top: 10px;}
+		ol{position: fixed;right: 0px;top: 50px; text-align: center;}
+		.cur{background: red;}
+		ol.show{opacity:1}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="page1 item">
+			<h1>第一屏</h1>
+			<div class="content"></div>
+		</div>
+		<div class="page2 item">
+			<h1>第二屏</h1>
+			<div class="content"></div>
+		</div>
+		<div class="page3  item">
+			<h1>第三屏</h1>
+			<div class="content"></div>
+		</div>
+		<div class="page4 item">
+			<h1>第四屏</h1>
+			<div class="content"></div>
+		</div>
+		<div class="page5 item">
+			<h1>第五屏</h1>
+			<div class="content"></div>
+		</div>
+	</div>
+	<div class="nav">
+		
+		<ol>
+			<li class="cur">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ol>
+	</div>
+
+
+	<script type="">
+		var page = document.querySelectorAll(".box .item");
+		var aBtn = document.querySelectorAll("ol li");
+		console.log(aBtn);
+		var H = 0;
+		// var H = null;
+		// 为窗口添加滚动条事件window.onscroll
+		window.onscroll = function(){
+
+			// 获取当前页面滚动条的纵坐标的位置,赋值给H
+			 H = document.documentElement.scrollTop ||document.body.scrollTop;
+			console.log(H);
+			if(H > 0){
+				aBtn[0].parentNode.className = "show";
+			}
+			else{
+				aBtn[0].parentNode.className = " ";
+			}
+
+			for(var i = 0;i<page.length;i++){
+				if (H>=page[i].offsetTop) {
+					for(var j=0; j<page.length; j++){
+                        aBtn[j].className = "";
+                    }
+                    aBtn[i].className = "cur";
+				}
+			}
+
+		}
+
+		
+	</script>
+
+</body>
+</html>

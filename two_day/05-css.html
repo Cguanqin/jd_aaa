@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		.box{
+			width: 50px;
+			height: 50px;
+			background: #eee;
+			margin: auto;
+		}
+
+		/*animation  调用rotate方法*/
+		.rotate{
+			animation: rotate111 3s linear  both;
+		}
+	/*@keyframes 类似定义一个方法体，rotate111 是方法体，里面的内容是方法体*/
+		@keyframes rotate111{
+			from{
+				transform:translateY(300px) rotate(0deg) ;
+			}
+			to{
+				transform:translateY(0px) rotate(360deg) ;
+			}
+
+		}
+
+	</style>
+</head>
+<body>
+	<div class="box rotate"></div>
+
+</body>
+</html>

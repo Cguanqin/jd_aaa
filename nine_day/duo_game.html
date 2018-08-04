@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	<script type="text/javascript" src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+	<script type="text/javascript" src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script>
+	<style >
+		.row{text-align: center;}
+		.create_home{margin-left: 280px}
+	</style>
+</head>
+<body>
+	<div class="view_box container">
+
+
+		<div v-if="!has_home" class="create_home">
+			<input type="text" v-model="home_num">
+			<input type="button" class="btn btn-primary" value="创建房间" @click="create()">
+			<input type="button" class="btn btn-primary" value="加入房间" @click="add()">
+		</div>
+
+		 <div class="row play_zuo" v-if="has_home">
+			<h3>房间号：{{home_num}}，准备游戏</h3>
+			<div v-for="n in 9" class="col-md-6">
+				{{n}}号座位<a @click="sitdown(n)" class="btn btn-primary" v-if="role==''">入座</a>
+				<b v-if="play_code == n">{{role}}</b>
+				
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		new Vue({
+			el:'.view_box', 
+
+			data:{
+				game_data:[],
+				play_code:0,
+				role:'',
+				has_home:false,  //是否有房间状态
+				home_num:null   //房间号
+			},
+			//Vue的生命周期
+			created(){
+			
+			},
+
+			methods:{
+				sitdown(code){
+					this.play_code = code
+					this.$http.get('http://localhost/web/nine_day/Langbos.php')
+					.then((rtnData)=>{
+						this.game_data = rtnData.data
+// 这里有疑问，对象可以直接存入数组中？
+						console.log(this.game_data)
+						this.role = this.getRole()
+					})
+
+				},
+				getRole(){
+					if (this.play_code== this.game_data.seer){
+						return '预言家'
+					}
+					else if (this.game_data.lang_num.indexOf(this.play_code)>-1) {
+						return '狼人'
+					}
+					else{
+						return '村姑'
+					}
+				},
+				create(){
+					// this.has_home = true
+					this.$http.get('http://localhost/web/nine_day/Langbos.php',
+						{
+							params:{home_num:this.home_num,play_type:1}
+
+						})
+						.then((rtnData)=>{
+							this.has_home = true
+							this.game_data = rtnData.data
+							  
+						})
+					
+				},
+				add(){
+					this.$http.get('http://localhost/web/nine_day/Langbos.php',{
+							params:{
+								home_num:this.home_num,play_type:2
+							}
+						}
+						)
+						.then((rtnData)=>{
+							this.has_home = true
+							this.game_data = rtnData.data
+						})
+				}
+			}
+ 
+
+		})
+	</script>
+
+</body>
+</html>

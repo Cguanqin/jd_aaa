@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		ul{
+			width: 330px;height: 330px;border: 1px dashed #eee;
+			margin: auto;
+			list-style: none;
+			text-align: center;
+			padding: 10px;
+
+		}
+		ul li{
+			width: 100px;height: 100px;
+			border: 1px solid #6666;
+			display: inline-block;
+			background: #eee;
+			position: relative;
+		}
+		ul li:nth-child(2n){
+			/*旋转5度*/
+			transform: rotate(5deg);
+		}
+		ul li:nth-child(2n+1){
+			transform:rotate(-5deg);
+		}
+		ul li:hover{
+			transform: scale(1.5);
+			z-index: 
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+
+</body>
+</html>

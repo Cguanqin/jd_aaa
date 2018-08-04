@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            cursor: move;
+            background: #eee;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box">1</div>
+
+    <script type="">
+        var obj = document.querySelector(".box");
+            obj.onmousedown= function(ev){
+                var oEvent = ev ||  event;  // 兼容火狐
+                //求出盒子左上角的坐标
+                var x = oEvent.clientX - obj.offsetLeft; //x是相对盒子的坐标
+                var y = oEvent.clientY - obj.offsetTop;
+                window.onmousemove = function(ev){
+                    var oEvent = ev ||  event;  // 兼容火狐
+                    obj.style.left = oEvent.clientX - x +"px";
+                    obj.style.top = oEvent.clientY- y+"px";
+                }
+
+                window.onmouseup = function(){
+                     window.onmousemove = null;
+                }
+            }
+
+
+        
+    </script>
+</body>
+</html>

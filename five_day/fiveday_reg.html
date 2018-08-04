@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style></style>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+
+	<!-- //导入jquery包 -->
+	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		
+		<h1 >欢迎来到注册页面</h1>
+		<?  
+
+		  ?>
+		<!-- onsubmit,当表单提交的的那一刻，开始校验,如果条件不成立，则中断表单的提交，不提交给后台 -->
+		<form action="fiveday_doreg.php" class="form" onsubmit=" return check()">
+			<div class="form-group">
+				<label>用户名</label>
+
+				<!-- //required，html5自带的一个属性，=>输入框不能为空 -->
+				<!-- 输入框内容：文本text,数字number,日期date，范围range,颜色color,密码password  -->
+
+				<input type="text" name="u_user" class="form-control" required="">
+			</div>
+			<div class="form-group">
+				<!-- 手机号码的类型选择number,防止用户输入字符串 -->
+				<label>手机号码</label>
+				<input type="number" name="mobile" class="form-control" required="" >
+			</div>
+			<div class="form-group">
+				<label>密码</label>
+				<input type="text" name="psd" class="form-control" required="" >
+			</div>
+			<div class="form-group">
+				<label>确定密码</label>
+				<input type="test" name="rpsd" class="form-control" required="" >
+			</div>
+			<div class="form-group">
+				<input type="submit" name="u-user" class="btn btn-success
+				btn-block">
+			</div>
+
+
+		</form>
+		
+	</div>
+
+	<script type="text/javascript">
+
+		function check(){
+			// alert('触发事件')
+
+			// 获取输入框的值得格式document.querySelector('[name=""]').value
+		var u_user = document.querySelector('[name="u_user"]').value 
+		// alert(u_user)
+		console.log(u_user.length)
+		var mobile = document.querySelector('[name="mobile"]').value
+		var psd= document.querySelector('[name="psd"]').value
+		var rpsd = document.querySelector('[name="rpsd"]').value
+			if(u_user.length<3){
+
+				// alert(u_user.length)
+
+				alert('用户名不能少于3位')
+				return false
+			}
+			// 正则表达式
+			// 格式：/表达式规则/.test(字符串)
+			// ^匹配以**开头  
+			else if (!/^1\d{10}$/.test(mobile)) {
+				alert('请输入正确格式的手机号码')
+				return false
+			}
+ 
+			//判断密码
+			else if (psd == ''){
+				alert('密码不能为空，请重新输入')
+			}
+			else if(psd != rpsd ){
+				alert('密码和确定密码不正确，请重新输入') 
+				return false
+			}
+			else{
+ 
+				//jquery请求页面跳转，$get(请求的url地址,{},function(res)){}
+					
+				// 第一个参数，请求的url接口地址
+			// 第二个参数，传给后台的值，是object对象类型
+				 // 第三个参数，接收后台响应回来的参数
+
+				$.get('fiveday_doreg.php',{u_user,mobile,psd},function (res) {
+					// 告诉用户注册状态
+					console.log(res)
+					alert('注册成功')
+				})
+				return false;
+
+			}
+		}
+		// function check() {
+		// 	// 用户名长度大于3位
+		// 	var u_name = document.querySelector('[name="u-user"]').value
+
+		// 	var mobile = document.querySelector('[name="mobile"]').value
+		// 	// 1开头，11位
+		// 	// 
+		// 	// 一种写法
+		// 	// /表达式规则/.test(字符串)
+		// 	//   ^ 匹配以什么开头
+		// 	//   10位数字（\d）
+		// 	//   位数{10}
+		// 	//   $ 匹配结束
+		// 	if (u_name.length<3) {
+		// 		alert('用户名不能少于3位')
+		// 		return false
+		// 	}else if(!/^1\d{10}$/.test(mobile)){
+		// 		alert('手机号码格式不正确')
+		// 		return false
+		// 	}else{
+		// 		return false
+		// 	}
+		// }
+		
+	</script>	
+
+</body>
+</html>

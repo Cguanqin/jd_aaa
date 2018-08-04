@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+		<!-- <table class="table table-hover">
+			<tr>
+				<th>商品ID</th>
+				<th>商品名称</th>
+				<th>商品价格</th>
+				<th>操作</th>
+			</tr>
+			<tr v-for="info in goods_list">
+				<th>{{info.ID}}</th>
+				<th>{{info.J_name}}</th>
+				<th>{{info.J_price}}</th>
+				<th><a href="" class="btn btn-primary">编辑</a></th>
+			</tr>
+		</table> -->
+
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+
+	<link type="text/css" rel="stylesheet" href="public/static/bootstrap-vue.min.css"/>
+
+	<script type="text/javascript" src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+	<script type="text/javascript" src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script>
+
+	<script src="public/static/bootstrap-vue.min.js"></script>
+<body>
+	<div class="container">
+		<h3>商品管理</h3>
+
+		<b-table :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" hover :items="goods_list" :fields="fields"></b-table>
+	</div>
+	<script type="text/javascript">
+		
+		new Vue({
+			el:'.container',
+			data:{
+				sortBy: 'age',
+     	 		sortDesc: false,   //默认升序
+				fields:[
+					{
+						key:'ID',
+						sortable:true,
+					},
+					{
+						key:'J_name',
+						label:'商品名称',
+					},
+					{
+						key:'J_price',    //显示的键
+						label:'商品价格', //表头标签
+						sortable:true,   //排序
+					},
+					{
+						label:'编辑',
+					}
+
+				],
+				goods_list:[]
+			},
+			mounted(){
+				this.$http.get('http://localhost/web/eleven_day?action=getList')
+				.then((rtnData)=>{
+					this.goods_list = rtnData.data
+				})
+			}
+		})
+	</script>
+</body>
+</html>

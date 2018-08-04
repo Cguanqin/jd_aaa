@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+
+<script>
+	var arr = [ '100px', 'abc'-6, [], -98765, 34, -2, 0, '300', , function(){alert(1);}, null, document, [],
+        true,'200px'-30,'23.45元', 5, Number('abc'), function(){ alert(3); }, 'xyz'-90 ];
+
+        console.log(typeof(arr[0]))
+
+        // 找出数组的的数字
+         for(var i=0; i<arr.length; i++){
+                if(typeof(arr[i]) == 'number'){
+                	if (isNaN(arr[i])) {
+                		continue
+                	}
+                	else
+                		console.log(arr[i])
+
+                }
+            }
+
+        // 找出数组中的字符串
+        for(var i=0; i<arr.length; i++){
+        	if (typeof(arr[i])  == 'string') {
+        		console.log(arr[i])
+        	}
+        }
+
+        // 找出可以转化成数字的
+        
+
+</script>
+</body>
+</html>

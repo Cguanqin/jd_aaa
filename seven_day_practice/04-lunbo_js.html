@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none
+        }
+        .box{
+            width: 250px;
+            height: 200px;
+            margin: 50px auto;
+        }
+        .box ul{
+            width: 250px;
+            height: 150px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        .box ul li{
+            width: 100%;
+            height: 100%;
+            background: #46f487;
+            position: absolute;
+            left: 250px;
+            top: 0;
+        }
+        .box ul li:nth-child(1){
+            background: #469cf4;
+        }
+        .box ul li:nth-child(2){
+            background: #f44646;
+        }
+        ol{text-align: center;}
+        ol li{display: inline-block; background: #ccc;cursor: pointer;color: #666;font-size: 12px;}
+        ol li.cur{background: red;
+            color: #fff;}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ol>
+            <li class="cur">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ol>
+        <a href="" onclick="next()">下一张</a>
+    </div>
+
+
+    <script type="">
+        var speed= 0;
+        var timer = null;
+        var key = 0;
+        var aLi = document.querySelectorAll(".box ul li");
+        var aBtn = document.querySelectorAll("ol li");
+        next();
+        autoPaly(2000);  
+        current();    
+
+        function next(){
+            move(aLi[key],250);
+            key++;
+           key = key >= aLi.length ? 0 : key; 
+            aLi[key].style.left = "250px";
+            move(aLi[key],0);
+        }
+
+        function move(obj,iTarget){
+        clearInterval(obj.timer)
+        obj.timer = setInterval(function(){
+            // 速度 = 目标点 - left值
+            speed = (iTarget - obj.offsetLeft) / 10;
+            speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+            // 50 ，45 ， 40
+            obj.style.left = obj.offsetLeft + speed + "px";
+
+            if(speed == 0){
+                // 到目标点了
+                clearInterval(obj.timer)
+            }
+            
+        },30)
+    }
+
+    //自动轮播
+    function autoPaly(time){
+        setInterval(function(){
+            for(var i = 0;i<aBtn.length;i++){
+                aBtn[i].className = "";
+            }
+            console.log(key)
+            aBtn[key].className = "cur";
+            next();
+
+        },time)
+    }
+
+    //小圆点
+    function current(){
+        
+        for(var i=0; i<aBtn.length; i++){
+            aBtn[i].id = i;
+            aBtn[i].onclick=function(){
+                for(var i=0; i<aBtn.length; i++){
+                    aBtn[i].className = "";
+                }
+                this.className = "cur";
+                key = this.id;  // 核心代码
+                next();
+            }
+        }
+    }
+
+        
+    </script>
+</body>
+</html>

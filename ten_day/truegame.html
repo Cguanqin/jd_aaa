@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>小狼人游戏 </title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+
+	<script type="text/javascript" src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+	<script type="text/javascript" src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script>
+	<style type="text/css">
+
+	input{color: #333}
+		.play_zuo > div{margin: 10px 0;text-align: center;}
+		.create_home{margin-left: 280px}
+	</style>
+</head>
+<body>
+
+	<!-- MVVM -->
+	<div class="view_box container" style="margin-top: 80px">
+{{game_data}}
+
+		 <div v-if="!has_home" class="create_home">
+		 	<input type="text" v-model="home_num">
+		 	<input type="button" class="btn btn-primary" value="创建房间" @click="create()">
+		 	<input type="button" class="btn btn-primary" value="加入房间" @click="add()">
+		 </div>
+		 <div class="row play_zuo" v-if="has_home">
+		 	<h3>房间号：{{home_num}}，正在准备开始游戏</h3>
+		 	<div v-for="n in 9" class="col-md-6">
+		 		{{n}}号座位 
+		 		<a @click="sitdown(n)" class="btn btn-danger" v-if="game_data.sit_num.indexOf(n) == -1">入座</a>
+		 		<a @click="sitdown(n)" class="btn btn-danger" v-if="game_data.sit_num.indexOf(n)>-1">入座</a>
+				<a class="btn btn-primary" v-if="roler!=''">
+					<b v-if="play_code == n">{{roler}}</b>	
+					<b else>做事</b>	
+				</a>
+		 	</div>
+		  
+		 </div>
+		 
+	</div>
+	 
+	<script type="text/javascript">
+		<!-- 客户端 -->
+		var ws = new WebSocket('ws://127.0.0.1:8008')
+		console.log(ws)
+		new Vue({
+			el:'.view_box',
+			data:{
+				game_data:[],
+				play_code:0,
+				roler:'',
+				home_num:null,//房间号
+				has_home:false,//是否有房间状态
+			},
+			created(){
+				
+			},
+			methods:{
+				sitdown(code){
+					let up_sit  = this.play_code
+					this.play_code = code
+					this.$http.get('http://localhost/web/ten_day/Langboys.php',{
+						params:{
+							play_type:3,  
+							sit_num:code,
+							up_sit:up_sit   //之前的座位
+						}
+					})
+					.then((rtnData)=>{
+						ws.send('玩家入座666')
+					})
+					 
+				},
+				getRole(){
+					// 获取角色
+					if (this.play_code == this.game_data.seer) {
+						return '预言家'
+					}
+					else if(this.game_data.lang_qun.indexOf(this.play_code) > -1){
+						return '狼人'
+					}
+					else{
+						return '村民'
+
+					}
+				},
+				create(){
+					this.$http.get('http://localhost/web/ten_day/Langboys.php',
+						{
+							params:{home_num:this.home_num,play_type:1}
+
+						})
+						.then((rtnData)=>{
+							this.has_home = true
+							this.game_data = rtnData.data
+							  
+						})
+					
+				},
+				add(){
+					ws.send('吴亦凡进来了66666666666')
+
+					ws.onmessage = (evt)=> {
+						console.log('有一个玩家进来了')
+						console.log(evt.data)
+
+						//在html,字符串转数组
+						this.game_data = JSON.parse(evt.data)
+					}
+					this.$http.get('http://localhost/web/ten_day/Langboys.php',{
+							params:{
+								home_num:this.home_num,play_type:2
+							}
+						}
+						)
+						.then((rtnData)=>{
+							this.has_home = true
+							this.game_data = rtnData.data
+							  
+						})
+				}
+			}
+		})
+	</script>
+</body>
+</html>

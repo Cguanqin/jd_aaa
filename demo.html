@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>狼人杀</title>
+	<script type="text/javascript" src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+	<script type="text/javascript" src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script>
+</head>
+<body>
+	<div class="view_box">
+		<h1>游戏已经开始，请验人</h1>
+		<div v-for ="n in game_data['play_num']">
+			玩家代号{{n}}已进入游戏
+				<a href="">检验</a>
+		</div>
+	</div>
+
+
+<script type="">
+	new Vue({
+		el:'.view_box',
+		data:{
+			game_data:[]
+		},
+
+		created(){
+			//获取数据
+			this.$http.get('')
+			.then((rtnD)=>{
+				this.game_data =rtnD.data
+			})
+		}
+	})
+</script>
+</body>
+</html>

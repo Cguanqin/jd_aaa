@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+	*{margin: 0;height: 0}
+	.box{
+		width: 300px;height: 250px;
+		margin: auto;
+		background: #eee;
+		position: relative;
+		overflow: hidden;
+		
+	}
+	
+	.box .ch_box1{
+		width: 300px;height: 50px;
+		background:red;
+		bottom: -50px;
+		position: absolute;
+		
+	}
+	.box:hover{
+		box-shadow: 1px 2px 5px #666;
+		transition: all 1s;
+		/*鼠标悬停时，盒子变大1.5倍*/
+		transform: scale(1.5);
+
+	}
+	.box:hover .ch_box1{
+		bottom: 0px;
+		transition: all 1s;
+	}
+
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="ch_box1"></div>
+		
+	</div>
+
+
+</body>
+</html>

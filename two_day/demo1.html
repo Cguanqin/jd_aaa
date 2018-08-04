@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+	*{margin: 0;
+		padding: 0;
+
+	}
+	.container_box .first_box{
+		width: 300px;
+		height: 300px;
+		background-color:#ccc;
+		margin: auto;
+		color: red;
+		position: relative;
+		overflow: hidden;
+		transition: all 1s;
+	}
+	.container_box .first1_box{
+		width: 300px;
+		height: 50px;
+		background-color: red;
+		position: absolute;
+		bottom: -50px;
+		transition: all 0.5s;
+	}
+	.first_box:hover{
+		background-color: yellow;
+		box-shadow: 1px 1px 3px red;
+		bottom: 0px;
+	}
+	.first_box:hover .first1_box{
+		bottom: 0px;
+	}
+
+</style>
+</head>
+<body>
+	<div class="container_box">
+		<div class="first_box">
+			<div class="first1_box">
+				111
+			</div>
+		</div>
+		
+	</div>
+
+</body>
+</html>

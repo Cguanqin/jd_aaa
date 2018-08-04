@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var a =1;
+        var fn1 = function (){
+            alert(a) // 1
+            alert(b)
+            var b = a = 2;
+        }
+        fn1();
+        alert(a) // 2
+
+        // 1.先解析（找 var, function, 参数.   如果重名了，函数就会替换掉变量）  
+        // 2.在执行
+
+        // a= 1
+        // fn1 = fn
+
+            // a = 2
+
+
+
+        // 父函数不可以函数的局部变量   script   function
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- 匀速运动 -->
+    <!-- 减速运动 -->
+    <div class="content">
+
+    <input type="button" onclick="move(5,100)"  value="匀速向右" >
+    <input type="button" onclick="move(-5,0)"  value="匀速向左" >
+    <div class="box"></div>
+    </div>
+
+
+    <script>
+        var box = document.querySelector(".box");
+        var timer = null;
+        // var speed = 2;
+
+        function move(speed,iTarget){
+        	// 有疑问
+            clearInterval(timer)
+            console.log(box.offsetLeft)
+            timer = setInterval(function(){
+                if(box.offsetLeft == iTarget){
+                    clearInterval(timer);
+                }
+                else{
+                    box.style.marginLeft=box.offsetLeft + speed + "px"
+                }
+                
+            },30)
+        }
+        
+    </script>
+</body>
+</html>

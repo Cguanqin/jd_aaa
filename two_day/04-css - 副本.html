@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+            width: 960px;
+            margin: 50px auto;
+            border: 1px dashed #ccc;
+            text-align: center;
+            padding: 30px 0;
+        }
+        ul>li{
+            height: 150px;
+            width: 300px;
+            border:1px solid #ccc;
+            display: inline-block;
+            margin-bottom: 30px;
+            background: #fff;
+            transition: all 0.5s;
+            position: relative;
+        }
+        ul li:nth-child(2n){
+            transform: rotate(5deg);
+        }
+        ul li:nth-child(2n+1){
+            transform: rotate(-5deg);
+        }
+        ul>li:hover{
+            transform: rotate(0deg) scale(1.5);
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        transform   变形变换 移动
+        transition  过渡
+        animation   调用动画
+        @keyframes  定义动画
+         -->
+
+         <ul>
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
+         </ul>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	<script type="text/javascript" src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+	<script type="text/javascript" src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script>
+	<style >
+		.row{text-align: center;}
+	</style>
+</head>
+<body>
+	<div class="view_box container">
+		<div class="row">
+			<div v-for="n in 9" class="col-md-6">
+				{{n}}号座位<a @click="sitdown(n)" class="btn btn-primary" v-if="role==''">入座</a>
+				<b v-if="play_code == n">{{role}}</b>
+				<!-- <b else>做事</b> -->
+			</div>
+		</div>
+
+	</div>
+
+	<script type="text/javascript">
+		new Vue({
+			el:'.view_box',
+			data:{
+				game_data:[],
+				play_code:0,
+				role:''
+			},
+			created(){
+				
+			},
+			methods:{
+				sitdown(code){
+					this.play_code = code
+					this.$http.get('http://localhost/18shujia/lesson_9/LangBoy.php')
+						.then((rtnData)=>{
+							this.game_data = rtnData.data
+							console.log(this.game_data)
+							this.role = this.getRole()
+						})
+				},
+				getRole(){
+					// 获取角色
+					if (this.play_code == this.game_data.seer) {
+						return '预言家'
+					}
+					else if(this.game_data.langqun_a.indexOf(this.play_code) > -1){
+						return '狼人'
+					}
+					else{
+						return '村民'
+
+					}
+				}
+			}
+		})
+	</script>
+
+</body>
+</html>

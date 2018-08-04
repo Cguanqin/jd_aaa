@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style>
+		*{margin: 0;padding: 0;}
+		.box{width: 100px;height: 100px;background: red}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<input type="button" value="减速" onclick="move(300)">
+		<div class="box"></div>
+	</div>
+	<script type="">
+		var box = document.querySelector(".box");
+		var speed = null;
+		var timer;
+		function move(itarget){
+			clearInterval(timer)
+
+			timer = setInterval(function(){
+				console.log(box.offsetLeft)
+				if (box.offsetLeft == itarget) {
+				clearInterval(timer)
+			}
+			speed = (itarget - box.offsetLeft)/10;
+			console.log(speed);
+			speed = speed > 0 ?Math.ceil(speed) : Math.floor(speed);
+
+			box.style.marginLeft = box.offsetLeft+speed+"px";
+		},30)
+			
+		}
+	</script>
+
+</body>
+</html>

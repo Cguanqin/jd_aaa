@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		*{margin: 0px;
+			padding: 0px;}
+		.box{width: 50px;height: 50px;background: #ccc;cursor: move;position: absolute;left:10px;top: 10px; }
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+<script type="text/javascript">
+	var obj = document.querySelector(".box");
+	//鼠标按下的x,y轴
+	obj.onmousedown = function(ev){
+		var oEvent = ev || event;  //兼容性
+		var x  = oEvent.clientX - obj.offsetLeft;
+		var y  = oEvent.clientY - obj.offsetTop;
+		console.log(x)
+
+   // 鼠标移动的距离
+		window.onmousemove = function(ev){
+			var oEvent = ev || event;  //兼容性
+			obj.style.left = oEvent.clientX - x + "px";
+			obj.style.top = oEvent.clientY - y + "px";
+		}
+
+		window.onmouseup = function(){
+			window.onmousemove = null;
+		}
+	}
+
+
+</script>
+
+</body>
+</html>

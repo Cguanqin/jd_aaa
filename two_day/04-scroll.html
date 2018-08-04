@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none
+        }
+        .box{
+            text-align: center;
+        }
+        .box .item{
+            margin-bottom: 30px;
+        }
+        .box .item h1{
+            font-weight: normal;
+            color: #333;
+            font-size: 18px;
+        }
+        .box .content{
+            height: 500px;
+            background: #ccc;
+            width: 800px;
+            margin: auto;
+        }
+        ol li{
+            width: 50px;
+            height: 50px;
+            background: #ccc;
+            text-align: center;
+            line-height: 50px;
+            margin-top: 10px;
+        }
+        ol li.cur{
+            background: red;
+        }
+        ol{
+            position: fixed;
+            right: 0px;
+            top: 80px;
+        }
+    </style>
+</head>
+<body style="height: 2000px;">
+
+    <div class="box">
+        <div class="page1 item">
+            <h1>第1屏</h1>
+            <div class="content"></div>
+        </div>
+        <div class="page2 item">
+            <h1>第2屏</h1>
+            <div class="content"></div>
+        </div>
+        <div class="page3 item">
+            <h1>第3屏</h1>
+            <div class="content"></div>
+        </div>
+        <div class="page4 item">
+            <h1>第4屏</h1>
+            <div class="content"></div>
+        </div>
+        <div class="page5 item">
+            <h1>第5屏</h1>
+            <div class="content"></div>
+        </div>
+    </div>
+    <ol>
+        <li class="cur">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ol>
+
+    <script>
+        var page = document.querySelectorAll(".box .item");
+        var aBtn = document.querySelectorAll("ol li");
+        var Itarget;
+        var H;
+        window.onscroll=function(){
+
+            // 屏幕上方与滚动条的距离
+             H = document.documentElement.scrollTop || document.body.scrollTop;
+
+            for(var i=0; i<page.length; i++){
+                // 滚动的距离 >= page.top
+
+                if(H >= page[i].offsetTop){
+                    for(var j=0; j<page.length; j++){
+                        aBtn[j].className = "";
+                    }
+                    aBtn[i].className = "cur";
+                }
+            }
+
+            
+        
+
+        for(var i = 0;i<aBtn.length;i++){
+                aBtn[i].setAttribute = ("data-index",i)
+                aBtn[i].onclick=function(){
+                    var id = this.getAttribute("data-index");
+                    Itarget = page[id].offsetTop;
+                    window.scrollTo(0,Itarget);
+                    console.log(Itarget);
+                }
+            }
+
+        function move(Itarget){
+        clearInterval(timer)
+        timer = setInterval(function(){
+            speed = (Itarget - H)/10
+            console.log(speed)
+            console.log(box.offsetLeft)
+            speed = speed > 0 ? Math.ceil(speed):Math.floor(speed);
+            window.scrollTo(0,speed+H);
+            if(speed == 0)
+                clearInterval(timer)
+},30)
+        }
+            }
+    </script>
+</body>
+</html>
