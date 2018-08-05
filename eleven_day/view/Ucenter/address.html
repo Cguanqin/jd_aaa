@@ -1,38 +1,47 @@
 {include file="head.html"}
+
 <link rel="stylesheet" href="http://unpkg.com/iview/dist/styles/iview.css">
 <!-- import iView -->
 <script src="http://unpkg.com/iview/dist/iview.min.js"></script>
-<body>
-	<div class="container">
-		<div class="col-md-3">{include file="ucenter/menu.html"}</div>
-		<div class="col-md-9" >
-		<h3>收货地址管理 <a @click="show=true" class="btn btn-success">添加地址</a></h3>
-		<modal v-model = "show">
+<div class="container">
+    <div class="col-md-3">{include file="ucenter/menu.html"}</div>
+    <div class="col-md-9">
+         <h3>收货地址管理 <a @click="show=true"  class="btn btn-success">添加地址</a></h3>
+         <modal v-model="show" @on-ok="add">
 
-			<form action="" class="form" @on-ok="add">
-				<div class="from-group">
-					<label >收货地址</label>
-					<input type="text" class="form-control">
-				</div>
-				<div class="from-group">
-					<label >选择地区</label>
-					<Cascader :data="data" v-model="area"></Cascader>
-				</div>
-			</form>
-		</modal>
-		<ul>
-			<li></li>
-		</ul>
-		</div>
-	</div>
+            <form action="" class="form">   
+                <div class="from-group">
+                    <label >收货人</label>
+                    <input v-model="receive_people" type="text" class="form-control" >
+                </div>
+                <div class="from-group">
+                    <label>选择地区</label>
+                    <Cascader :data="data" v-model="area"></Cascader>
+                </div>
+            </form>
+        </modal>
+         <ul>
+            <li v-for="addr in addr_list">
+                <p>收货人：$ addr.receive_people $</p>
+                <p>收货地址：$ addr.area $</p>
+            </li>
+         </ul>
+    </div>
+</div>  
 <script type="text/javascript">
-	
-	new Vue({
-		el:'.container',
-		data:{
-			show:false,
-			area:'',//选择后赋值给它
-			data:[{
+
+    //如果是post类型请求给后台，必须要加上下面一句代码，主要的作用是转化代码格式
+    Vue.http.options.emulateJSON = true;
+    new Vue({
+        
+        el:'.container',
+        delimiters:['$','$'],
+        data:{
+            show:false,
+            area:'',//选择后赋值给它
+            receive_people:'', //收货人
+            addr_list:[],
+            data:[{
                     value: 'beijing',
                     label: '北京',
                     children: [
@@ -79,9 +88,42 @@
                         }
                     ],
                 }]
-		}
-	})
+        },
+        mounted(){
+            this.$http.post('{url("ucenter","getAdres")}')
+            .then((rtnD)=>{
+                this.addr_list = rtnD.data
+            })
+        },
+        methods:{
+            add(){
+                this.$http.post('{url("ucenter","saveAdres")}',{
+                    receive_people:this.receive_people,
+                    //数组转字符串
+                    area:JSON.stringify(this.area)
+                }
+                    )
+                .then((rtnD)=>{
+                    if(rtnD.data.status == 1){
+                        
+                        //会不会和 this.addr_list = rtnD.data 有冲突？
+                    this.addr_list.unshift({ 
+                     receive_people:this.receive_people,
+                    //数组转字符串
+                    // area:JSON.stringify(this.area)
+                    area:rtnD.data.area,
+                        })
+                    }
+                })
+
+
+                 //查看多级联动是什么类型，查询结果是数组类型 
+                console.log(this.area)
+            }
+            
+
+        }
+    })
 </script>
 </body>
-
 </html>

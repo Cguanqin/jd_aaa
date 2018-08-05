@@ -61,6 +61,7 @@ public function insert($data ){
     $sql ="insert into $table_name ($cols) values ($values)";
 
     try {
+
     	$this->pdo->exec($sql);
     } catch (PDOException $e) {
     	if ($this->debug) {
